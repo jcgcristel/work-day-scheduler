@@ -1,5 +1,23 @@
 // array to hold event information
-var eventArr = [];
+var eventsArr = [];
+
+var setEvent = function(id, event) {
+    $(`#${id}`).val(event);
+}
+
+// load events from localstorage 
+var load = function() {
+    eventsArr = JSON.parse(localStorage.getItem("events"))
+
+    // check if events in localstorage exist
+    if (!eventsArr) {
+        eventsArr = [];
+    }
+
+    for (var i = 0; i < eventsArr.length; i++) {
+        setEvent(eventsArr[i].id, eventsArr[i].event);
+    }
+}
 
 // set current day at the top of the page
 var setCurrentDay = function() {
@@ -25,8 +43,7 @@ var createHourBlock = function(hour, description, save) {
 
     // event
     var eventEl = $("<textarea>").addClass("col-9 p-3 text-dark past")
-        .attr("id", `row${hour}-event`)
-        .val("Texte");
+        .attr("id", `row${hour}-event`);
 
     // save
     var saveEl = $("<div>").addClass("col-1 p-3 saveBtn d-flex justify-content-center align-items-center")
@@ -54,15 +71,21 @@ var createWorkSchedule = function() {
 
 setCurrentDay();
 createWorkSchedule();
+load();
 
-// check if event already exists in array
+// check if event already exists in array, returning the id if it does
 var eventExists = function(object, list) {
     for (var i = 0; i < list.length; i++) {
         if (list[i].id == object.id) {
-            return true;
+            return i;
         }
     }
     return false;
+}
+
+// update local storage
+var save = function(id) {
+    console.log(localStorage.setItem("events", JSON.stringify(eventsArr)));
 }
 
 // clicking save button will save event
@@ -76,14 +99,22 @@ $(".saveBtn").click( function(event) {
         event: textEl.val()
     }
 
+    var id = eventExists(event, eventsArr);
+
      // checks if event already exists in array
-     if (eventExists(event, eventArr)) {
-        // exits -> updates event
-        textEl.attr("event", textEl.val());
+     if (id !== false) {
+        console.log("exists");
+        // updates event
+        eventsArr[id].event = event.event;
+        console.log(eventsArr);
      }
      else {
-        // !exist -> add new event
-        eventArr.push(event);
+        console.log("does not exists")
+        // creates new event
+        eventsArr.push(event);
      }
+
+     console.log("saving")
+     save(event.id);
 })
 
