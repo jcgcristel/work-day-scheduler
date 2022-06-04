@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 // array to hold event information
 var eventsArr = [];
 
@@ -9,7 +7,6 @@ const eventClass = "col-9 p-3 text-dark";
 const saveClass = "col-1 p-3 saveBtn d-flex justify-content-center align-items-center";
 const saveIcoPath = "./assets/images/save.png"
 
->>>>>>> feature/persistent-event
 // set current day at the top of the page
 var setCurrentDay = function() {
     // grabs current time in [Weekday, Month Day] format
@@ -22,8 +19,6 @@ var setCurrentDay = function() {
     $("#currentDay").text(today);
 }
 
-<<<<<<< HEAD
-=======
 var setEvent = function(id, event) {
     $(`#${id}`).val(event);
 }
@@ -51,7 +46,6 @@ var load = function() {
     }
 }
 
->>>>>>> feature/persistent-event
 // create single hour block
 var createHourBlock = function(hour, description, save) {
     // create hour block element
@@ -61,23 +55,7 @@ var createHourBlock = function(hour, description, save) {
     hourText = luxon.DateTime.fromObject({hour: hour}).toLocaleString(luxon.DateTime.TIME_SIMPLE);
     
     // hour
-<<<<<<< HEAD
-    var hourEl = $("<div>").addClass("col-2 p-3 hour text-right").text(hourText);
-
-    // event
-    var eventEl = $("<textarea>").addClass("col-9 p-3 text-dark past")
-        .attr("id", `row${hour}-event`)
-        .val("Texte");
-
-    // save
-    var saveEl = $("<div>").addClass("col-1 p-3 saveBtn d-flex justify-content-center align-items-center")
-        .attr("id", `row${hour}`);
-    // save button
-    var saveIco = $("<img>").attr("src", "./assets/images/save.png");
-    saveEl.append(saveIco);
-=======
     var hourEl = $("<div>").addClass(hourClass).text(hourText);
->>>>>>> feature/persistent-event
 
     // event
     var eventEl = $("<textarea>").addClass(eventClass + " past")
@@ -136,17 +114,6 @@ var setBgColour = function() {
 
 setCurrentDay();
 createWorkSchedule();
-<<<<<<< HEAD
-
-// clicking save button will save event
-$(".saveBtn").click( function(event) {
-    var rowID = $(this).attr("id");
-    var textID = `${rowID}-event`;
-    var textEl = $(`#${textID}`);
-
-    console.log(textEl.val());
-    console.log("saving")
-=======
 load();
 setBgColour();
 
@@ -181,6 +148,5 @@ $(".saveBtn").click( function(event) {
     eventsArr[id].event = event.event;
 
     save();
->>>>>>> feature/persistent-event
 })
 

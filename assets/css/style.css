@@ -62,11 +62,7 @@ textarea{
   border-left: 1px solid black;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
-<<<<<<< HEAD
-  background-color:  rgba(6, 174, 213, 0.5);
-=======
   background-color: rgba(6, 174, 213, 0.5);
->>>>>>> feature/persistent-event
   color: white;
 }
 
