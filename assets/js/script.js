@@ -37,6 +37,7 @@ var createHourBlock = function(hour, description, save) {
     $(".container").append(hourBlock);
 }
 
+// create workday agenda
 var createWorkSchedule = function() {
     for (var i = 8; i <= 17; i++) {
         createHourBlock(i);        
